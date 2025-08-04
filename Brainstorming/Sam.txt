@@ -1,1 +1,8 @@
 # Sam's brainstorming notes for week 2 project
+General idea: use some sort of high-dimensionality MRI data to train SVM on some sort of disease functionality in a longitudinal study
+- p_factor (maybe only in some studies?) as general psychopathology aka symptomology measure
+- DMN in functional imaging?
+- SVM specifically seemed to have good results with schizophrenia
+	- Paper says that it can be difficult to interpret, but I wonder if we can treat this more as a classification question
+- Resting state fMRI may also be useful?
+- Emotional and cognitive action control networks were also good networks
