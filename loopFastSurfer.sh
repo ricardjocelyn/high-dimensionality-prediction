@@ -1,7 +1,8 @@
 DATA_DIR="/home/jovyan/shared/data/OASIS-2/OAS2_RAW_PART1/"
 THIS_SUBJ="OAS2_0002_MR1"
+FILE_DIR="/RAW/mpr-1.nifti.hdr"
 SETUP_DIR=$/home/jovyan/FastSurfer
-THIS_FILE="/home/jovyan/shared/data/OASIS-2/OAS2_RAW_PART1/" $THIS_SUBJ "/RAW/mpr-1.nifti.hdr"
+THIS_FILE="$DATA_DIR $THIS_SUBJ $FILE_DIR"
 cd /home/jovyan/FastSurfer
 ./run_fastsurfer.sh --t1 $THIS_FILE \
                                      --sd "{SETUP_DIR}fastsurfer_seg" \
