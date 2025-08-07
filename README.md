@@ -1,5 +1,5 @@
 # high-dimensionality-prediction
-This week 2 project aims to predict future behavior based on  high dimensional MRI data
+This week 2 project aims to predict future cognitive test scores based on high dimensional MRI data
 
 ## Oasis2 Longitudinal Demographics Data Dictionary
 
