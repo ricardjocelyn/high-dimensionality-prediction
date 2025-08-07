@@ -36,7 +36,7 @@ def session_counts_by_group(
     df, subject_col="Subject ID", group_col="Group", session_col="Visit"
 ):
     """
-    Count how many participants in each group have how many sessions.
+    Count how many participants in each group reached a given maximum session number.
 
     Parameters:
     - df (pd.DataFrame): The input DataFrame.
@@ -45,27 +45,30 @@ def session_counts_by_group(
     - session_col (str): Column with session or visit number.
 
     Returns:
-    - pd.DataFrame with the count of participants per group by number of sessions.
+    - pd.DataFrame with the count of participants per group by max session number.
     """
 
-    # Count number of sessions per participant
+    # Get the maximum session number per participant
     session_counts = (
-        df.groupby(subject_col)[session_col].nunique().reset_index(name="n_sessions")
+        df.groupby(subject_col)[session_col].max().reset_index(name="max_session")
     )
 
-    # Merge back the group info (assuming group is constant per participant)
+    # Merge back the group info (assuming group is constant or taken from latest session)
     session_counts = session_counts.merge(
-        df[[subject_col, group_col]].drop_duplicates(), on=subject_col, how="left"
+        df[[subject_col, group_col]].drop_duplicates(subset=subject_col, keep="last"),
+        on=subject_col,
+        how="left",
     )
 
-    # Count how many participants in each group have N sessions
+    # Count how many participants in each group have each max session number
     summary = (
-        session_counts.groupby([group_col, "n_sessions"])
+        session_counts.groupby([group_col, "max_session"])
         .size()
         .reset_index(name="count")
     )
 
-    return summary.sort_values([group_col, "n_sessions"])
+    return summary.sort_values([group_col, "max_session"])
+
 
 
 def box_plot(data, value_col, group_col, title, xlabel, ylabel):
